@@ -723,6 +723,7 @@ static void handle_signal(int sig)
 
 	switch (sig) {
 	case SIGINT:
+	case SIGTERM:
 		cmd = OC_CMD_CANCEL;
 		break;
 	case SIGHUP:
@@ -1532,6 +1533,7 @@ int main(int argc, char **argv)
 
 	sa.sa_handler = handle_signal;
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGTERM, &sa, NULL);
 	sigaction(SIGHUP, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 #endif /* !_WIN32 */
